@@ -9,6 +9,8 @@ const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
 const PORT = process.env.PORT || 5000;
+const swaggerJSDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 dotenv.config();
 app.use(express.json());
@@ -37,6 +39,30 @@ const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   res.status(200).json("File has been uploaded");
 });
+
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Blog API project",
+      version: "1.0.0",
+    },
+    servers: [
+      {
+        // url: "http://localhost:5000/",
+        url: "https://helpful-stockings-fly.cyclic.app/",
+      },
+    ],
+  },
+  apis: ["./index.js", "./routes/*.js", "./models/*.js"],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+// app.get("/", (req, res) => {
+//   res.send("Blog Api is up and running. Go to /api/docs for documentation");
+// });
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
