@@ -49,7 +49,8 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:5000/",
+        // url: "http://localhost:5000/",
+        url: "https://helpful-stockings-fly.cyclic.app/",
       },
     ],
   },
@@ -59,19 +60,9 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-/**
- * @openapi
- * /:
- *  get:
- *    summary:  Responds if the app is up and running
- *    description:  Responds if the app is up and running
- *    responses:
- *      200:
- *        description: App is up and running
- */
-app.get("/", (req, res) => {
-  res.send("Blog Api is up and running. Go to /api/docs for documentation");
-});
+// app.get("/", (req, res) => {
+//   res.send("Blog Api is up and running. Go to /api/docs for documentation");
+// });
 
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);

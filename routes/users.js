@@ -58,4 +58,96 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+/**
+ * @openapi
+ * '/api/users/{_id}':
+ *  get:
+ *     tags:
+ *     - Users
+ *     summary: Get a single user by the id
+ *     parameters:
+ *      - name: _id
+ *        in: path
+ *        description: The id of the user
+ *        required: true
+ *     responses:
+ *       200:
+ *         description: Success
+ *         content:
+ *          application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/CreateAuthLoginResponse'
+ *       404:
+ *         description: User not found
+ *       500:
+ *         description: User _id should be 24 characters long
+ */
+
+/**
+ * @openapi
+ * '/api/users/{_id}':
+ *  put:
+ *     tags:
+ *     - Users
+ *     summary: Update a user by id only if userId and _id matches
+ *     description:  Update a user if userId and _id matches
+ *     parameters:
+ *      - name: _id
+ *        in: path
+ *        description: The id of the user
+ *        required: true
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/UpdateUserSchema'
+ *     responses:
+ *      200:
+ *        description: Success
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/UpdateUserSchemaResponse'
+ *      409:
+ *        description: Conflict
+ *      400:
+ *        description: Bad request
+ *      404:
+ *        description: Post not found
+ *      500:
+ *        description: Post _id should be 24 characters long
+ */
+
+/**
+ * @openapi
+ * '/api/users/{_id}':
+ *  delete:
+ *     tags:
+ *     - Users
+ *     summary: Delete a user by id only if userId and _id matches
+ *     description:  Delete a user if userId and _id matches
+ *     parameters:
+ *      - name: _id
+ *        in: path
+ *        description: The id of the user
+ *        required: true
+ *     requestBody:
+ *      required: true
+ *      content:
+ *        application/json:
+ *           schema:
+ *              $ref: '#/components/schemas/DeleteUserSchema'
+ *     responses:
+ *      200:
+ *        description: Success
+ *      409:
+ *        description: Conflict
+ *      400:
+ *        description: Bad request
+ *      404:
+ *        description: Post not found
+ *      500:
+ *        description: Post _id should be 24 characters long
+ */
 module.exports = router;

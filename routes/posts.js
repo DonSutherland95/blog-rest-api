@@ -1,5 +1,4 @@
 const router = require("express").Router();
-// const User = require("../models/User");
 const Post = require("../models/Post");
 
 //CREATE POST
@@ -36,7 +35,7 @@ router.put("/:id", async (req, res) => {
         res.status(500).json(err);
       }
     } else {
-      res.status(401).json("You can update only your post!");
+      res.status(401).json("You can only update your post!");
     }
   } catch (err) {
     res.status(500).json(err);
@@ -157,7 +156,7 @@ router.get("/", async (req, res) => {
  *         content:
  *          application/json:
  *           schema:
- *              $ref: '#/components/schema/Post'
+ *              $ref: '#/components/schemas/Post'
  *       404:
  *         description: Post not found
  *       500:
@@ -205,7 +204,8 @@ router.get("/", async (req, res) => {
  *  delete:
  *     tags:
  *     - Posts
- *     summary: Delete a post by the id
+ *     summary: Delete a post by id and corresponding username
+ *     description:  Delete a user by id and corresponding username
  *     parameters:
  *      - name: _id
  *        in: path
